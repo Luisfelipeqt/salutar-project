@@ -1,1 +1,15 @@
+spring:
+  datasource:
+    username: root
+    password: 99620530
+    url: jdbc:mysql://localhost:3306/db_salutar?useSSL=false&timeZone=GMT
 
+  jpa:
+    show-sql: true
+    open-in-view:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
