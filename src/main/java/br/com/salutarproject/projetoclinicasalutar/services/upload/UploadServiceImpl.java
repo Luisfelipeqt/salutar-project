@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 @Component
 public class UploadServiceImpl implements IUploadService{
@@ -19,9 +20,11 @@ public class UploadServiceImpl implements IUploadService{
         try {
             System.out.println("DEBUG - Realizando Upload do arquivo: " + arquivo.getOriginalFilename());
             String pastaDestino = "C:\\Users\\felipe\\Desktop\\upload";
-            Path path = Paths.get(pastaDestino + File.separator + arquivo.getOriginalFilename());
+            String extension = arquivo.getOriginalFilename().substring(arquivo.getOriginalFilename().lastIndexOf("."));
+            String newFilename = UUID.randomUUID().toString() + extension;
+            Path path = Paths.get(pastaDestino + File.separator + newFilename);
             Files.copy(arquivo.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            return arquivo.getOriginalFilename();
+            return newFilename;
         }
         catch(IOException e){
             e.printStackTrace();

@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IMidiaServiceImpl implements IMidiaService{
 
-    private MidiaRepository midiaRepository;
+    private final MidiaRepository midiaRepository;
 
 
     @Override
