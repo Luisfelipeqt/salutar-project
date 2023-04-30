@@ -1,21 +1,19 @@
-package br.com.salutarproject.projetoclinicasalutar.services;
+package br.com.salutarproject.projetoclinicasalutar.services.fichas;
 
 import br.com.salutarproject.projetoclinicasalutar.entities.FichaPaciente;
 import br.com.salutarproject.projetoclinicasalutar.repositories.FichaPacienteRepository;
 import br.com.salutarproject.projetoclinicasalutar.services.exceptions.FichaNotFoundExpcetion;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class FichaPacienteServiceImpl implements IFichaPacienteService{
 
-    @Autowired
-    private FichaPacienteRepository fichaPacienteRepository;
+    private final FichaPacienteRepository fichaPacienteRepository;
 
 
     @Override
@@ -29,7 +27,14 @@ public class FichaPacienteServiceImpl implements IFichaPacienteService{
 
     @Override
     public FichaPaciente alterar(FichaPaciente alterarFicha) {
-        return fichaPacienteRepository.save(alterarFicha);
+        var tmp = fichaPacienteRepository.findById(alterarFicha.getId()).orElse(null);
+        if(tmp != null) {
+            if (alterarFicha.getAtivo() != null) {
+                tmp.setAtivo(alterarFicha.getAtivo());
+            }
+            return fichaPacienteRepository.save(alterarFicha);
+        }
+        return null;
     }
 
     @Override

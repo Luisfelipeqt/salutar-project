@@ -1,11 +1,14 @@
 package br.com.salutarproject.projetoclinicasalutar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -85,5 +88,7 @@ public class FichaPaciente implements Serializable {
     @Column(name = "ativo")
     private Integer ativo;
 
-
+    @OneToMany(mappedBy = "fichaPaciente", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Midia> midiaList;
 }

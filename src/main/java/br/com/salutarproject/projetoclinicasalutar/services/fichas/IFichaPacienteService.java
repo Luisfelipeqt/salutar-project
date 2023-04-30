@@ -1,4 +1,4 @@
-package br.com.salutarproject.projetoclinicasalutar.services;
+package br.com.salutarproject.projetoclinicasalutar.services.fichas;
 
 import br.com.salutarproject.projetoclinicasalutar.entities.FichaPaciente;
 
@@ -11,5 +11,7 @@ public interface IFichaPacienteService {
     List<FichaPaciente> buscarPorNome(String nome);
     FichaPaciente recuperarPeloId(Long id);
     boolean excluir(Long id);
+
+
 
 }

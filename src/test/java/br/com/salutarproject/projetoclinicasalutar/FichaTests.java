@@ -1,9 +1,7 @@
 package br.com.salutarproject.projetoclinicasalutar;
 
 import br.com.salutarproject.projetoclinicasalutar.entities.FichaPaciente;
-import br.com.salutarproject.projetoclinicasalutar.services.FichaPacienteServiceImpl;
-import br.com.salutarproject.projetoclinicasalutar.services.IFichaPacienteService;
-import lombok.RequiredArgsConstructor;
+import br.com.salutarproject.projetoclinicasalutar.services.fichas.FichaPacienteServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class FichaTests {
 
     @Autowired
-    FichaPacienteServiceImpl fichaPacienteService;
+    private  FichaPacienteServiceImpl fichaPacienteService;
 
     @Test
     void shouldCreateFicha(){
@@ -23,5 +21,10 @@ public class FichaTests {
         sut.setNomePaciente("Luis Felipe Rodrigues");
         var res = fichaPacienteService.cadastrar(sut);
         assertTrue(res != null && res.getUuid() != null && res.getAtivo() == 1);
+    }
+
+    @Test
+    void shouldDeleteFicha(){
+        assertTrue(fichaPacienteService.excluir(1L));
     }
 }
